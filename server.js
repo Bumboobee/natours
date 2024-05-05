@@ -5,7 +5,9 @@ dotenv.config({ path: './config.env' });
 const app = require('./app');
 
 mongoose
-  .connect(process.env.CONECTION_STRING)
+  .connect(process.env.CONECTION_STRING, {
+    dbName: 'natours',
+  })
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => {
     console.error('Error connecting to MongoDB:', err);
