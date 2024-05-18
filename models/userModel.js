@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: [true, 'Please tell us your name'],
-    minLength: [3, 'A user name must have more or equal then 3 characters'],
-    maxLength: [250, 'A user name must have less or equal then 250 characters'],
+    minLength: [3, 'A user name must have more or equal than 3 characters'],
+    maxLength: [250, 'A user name must have less or equal than 250 characters'],
   },
   email: {
     type: String,
@@ -25,8 +25,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['normal', 'guide', 'lead-guide', 'admin'],
-    default: 'normal',
+    enum: ['user', 'guide', 'lead-guide', 'admin'],
+    default: 'user',
   },
   password: {
     type: String,

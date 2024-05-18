@@ -6,25 +6,29 @@ const router = express.Router();
 
 router.post('/singup', authController.singup);
 router.post('/login', authController.login);
-
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
-router.patch(
-  '/updateMyPassword',
-  authController.protect,
-  authController.updatePassword
-);
-router.patch('/updateMe', authController.protect, userController.updateMe);
-router.delete('/deleteMe', authController.protect, userController.deleteMe);
 
-router.patch(
-  '/deactiveAccount',
-  authController.protect,
-  userController.deactivateAccount
-);
+//all the routes after that is going to use the auth.protected
+router.use(authController.protect);
 
-router.route('/').get(authController.protect, userController.getAllUsers);
+router.patch('/updateMyPassword', authController.updatePassword);
 
-router.route('/:id').get(userController.getUser);
+router.get('/me', userController.getMe, userController.getUser);
+router.patch('/updateMe', userController.updateMe);
+router.delete('/deleteMe', userController.deleteMe);
+
+router.patch('/deactiveAccount', userController.deactivateAccount);
+
+//all the routes after that is going to be available only for admin user
+router.use(authController.restrictTo('admin'));
+
+router.route('/').get(userController.getAllUsers);
+
+router
+  .route('/:id')
+  .get(userController.getUser)
+  .patch(userController.updateUser)
+  .delete(userController.deleteUser);
 
 module.exports = router;
