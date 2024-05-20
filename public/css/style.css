@@ -41,6 +41,10 @@ body {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 }
 
 .main {
@@ -549,6 +553,12 @@ body {
   top: 0;
   bottom: 0;
   width: 100%;
+}
+
+.mapPopup {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.4rem;
 }
 
 .marker {
@@ -1075,6 +1085,16 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 7rem;
+
+    /* For tablets and small desktops */
+    @media (max-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    /* For mobile devices */
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
 }
 
 .card {
